@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תורה - Интерактивный подстрочный перевод всех 5 книг</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: #2a5298;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .loading::after {
+            content: "...";
+            display: inline-block;
+            animation: dots 2s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ""; }
+            40% { content: "."; }
+            60% { content: ".."; }
+            80%, 100% { content: "..."; }
+        }
+
+        .error {
+            background: linear-gradient(135deg, #ffebee 0%, #ffffff 100%);
+            border: 2px solid #f44336;
+            color: #c62828;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        select {
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        select:hover {
+            border-color: #2a5298;
+            box-shadow: 0 5px 15px rgba(42, 82, 152, 0.2);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #1e3c72;
+            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            min-height: 400px;
+        }
+
+        .verse {
+            margin-bottom: 40px;
+            padding: 30px;
+            border-left: 4px solid #2a5298;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .verse-number {
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .hebrew-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: flex-end;
+            direction: rtl;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(30, 60, 114, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(30, 60, 114, 0.1);
+        }
+
+        .hebrew-word {
+            position: relative;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: white;
+            border: 2px solid transparent;
+            font-size: 22px;
+            font-family: 'David', 'Times New Roman', serif;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hebrew-word:hover {
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(42, 82, 152, 0.3);
+            border-color: #2a5298;
+        }
+
+        .hebrew-word.active {
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            color: white;
+            border-color: #1e3c72;
+            box-shadow: 0 6px 20px rgba(42, 82, 152, 0.4);
+        }
+
+        .word-analysis {
+            margin-top: 20px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f0f4f8 0%, #ffffff 100%);
+            border-radius: 12px;
+            border-left: 4px solid #2a5298;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            display: none;
+        }
+
+        .word-analysis.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .analysis-header {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e6ed;
+        }
+
+        .analysis-section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            color: #2a5298;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .transliteration {
+            background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #1976d2;
+            margin: 15px 0;
+            font-size: 18px;
+            font-weight: 500;
+            color: #1565c0;
+        }
+
+        .commentaries {
+            margin-top: 25px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #ffffff 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e1bee7;
+        }
+
+        .commentary-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .commentary-tab {
+            padding: 8px 16px;
+            background: #9c27b0;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .commentary-tab:hover {
+            background: #7b1fa2;
+            transform: translateY(-1px);
+        }
+
+        .commentary-tab.active {
+            background: #4a148c;
+            box-shadow: 0 4px 12px rgba(74, 20, 140, 0.3);
+        }
+
+        .commentary-content {
+            display: none;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #9c27b0;
+            line-height: 1.6;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .commentary-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .commentary-author {
+            font-weight: bold;
+            color: #4a148c;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .commentary-text {
+            color: #333;
+            font-style: italic;
+        }
+
+        .meaning-item {
+            background: white;
+            padding: 12px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            border-left: 3px solid #2a5298;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .meaning-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(42, 82, 152, 0.15);
+        }
+
+        .context-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 8px;
+            margin-top: 3px;
+        }
+
+        .russian-translation {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #fff5e6 0%, #ffffff 100%);
+            border-radius: 10px;
+            border: 1px solid #f0c674;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: left;
+            direction: ltr;
+            font-style: italic;
+            color: #5a4a2d;
+        }
+
+        .translation-label {
+            font-weight: bold;
+            color: #d2691e;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chapter-info {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(30, 60, 114, 0.3);
+        }
+
+        .chapter-info h2 {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+        }
+
+        .chapter-info .book-stats {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .instructions {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0fff0 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4caf50;
+            font-size: 14px;
+            color: #2e7d32;
+        }
+
+        .instructions-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1b5e20;
+        }
+
+        .navigation-info {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffffff 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff9800;
+            font-size: 14px;
+            color: #ef6c00;
+            text-align: center;
+        }
+
+        .cache-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cache-status.show {
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            // Обновление статуса режима загрузки
+            updateLoadingModeStatus() {
+                const statusElement = document.getElementById('loadingMode');
+                if (statusElement) {
+                    // Проверяем, используем ли реальные файлы или заглушки
+                    const usingRealFiles = this.cache.meta && !this.cache.meta._isMock;
+                    if (usingRealFiles) {
+                        statusElement.textContent = 'Загрузка из JSON файлов ✅';
+                        statusElement.style.color = '#4caf50';
+                    } else {
+                        statusElement.textContent = 'Демо-режим (встроенные данные) ⚠️';
+                        statusElement.style.color = '#ff9800';
+                    }
+                }
+            }
+
+            .controls {
+                grid-template-columns: 1fr;
+            }
+
+            .hebrew-words {
+                gap: 8px;
+                justify-content: center;
+            }
+
+            .hebrew-word {
+                font-size: 18px;
+                padding: 6px 10px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>תורה - Полный подстрочный анализ</h1>
+        <p class="subtitle">Интерактивный анализ всех 5 книг Торы с динамической загрузкой</p>
+    </header>
+
+    <div class="instructions">
+        <div class="instructions-title">📖 Как пользоваться:</div>
+        Выберите книгу, главу и стих. Нажмите на любое слово на иврите для детального анализа. Данные загружаются динамически для быстрой работы.
+    </div>
+
+    <div class="navigation-info">
+        📊 <strong>Статус:</strong> 5 книг • 187 глав • ~5845 стихов • <span id="loadingMode">Автоматическое определение режима загрузки</span>
+    </div>
+
+    <div class="controls">
+        <select id="bookSelect">
+            <option value="">Выберите книгу...</option>
+        </select>
+
+        <select id="chapterSelect" disabled>
+            <option value="">Сначала выберите книгу</option>
+        </select>
+
+        <select id="verseSelect" disabled>
+            <option value="">Сначала выберите главу</option>
+        </select>
+    </div>
+
+    <div id="content" class="content">
+        <div class="loading">Загрузка метаданных Торы</div>
+    </div>
+
+    <div class="cache-status" id="cacheStatus"></div>
+
+    <footer>
+        <p>© 2025 Интерактивное изучение Торы | Архитектура с динамической загрузкой</p>
+    </footer>
+</div>
+
+<script>
+        // Система управления состоянием приложения
+        class TorahApp {
+            constructor() {
+                this.cache = {
+                    meta: null,
+                    books: {},
+                    chapters: {}
+                };
+                this.currentState = {
+                    book: null,
+                    chapter: null,
+                    verse: 'all'
+                };
+                this.elements = {
+                    bookSelect: document.getElementById('bookSelect'),
+                    chapterSelect: document.getElementById('chapterSelect'),
+                    verseSelect: document.getElementById('verseSelect'),
+                    content: document.getElementById('content'),
+                    cacheStatus: document.getElementById('cacheStatus')
+                };
+                this.selectedWord = null;
+            }
+
+            // Инициализация приложения
+            async init() {
+                try {
+                    await this.loadMetadata();
+                    this.populateBookSelect();
+                    this.attachEventListeners();
+                    this.updateLoadingModeStatus();
+                    this.showCacheStatus('Приложение готово к работе');
+                } catch (error) {
+                    this.showError('Ошибка инициализации: ' + error.message);
+                }
+            }
+
+            // Загрузка метаданных всех книг
+            async loadMetadata() {
+                if (this.cache.meta) return this.cache.meta;
+
+                try {
+                    // Загружаем реальный файл метаданных
+                    const response = await fetch('data/meta.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    this.cache.meta = await response.json();
+                    return this.cache.meta;
+                } catch (error) {
+                    // Фолбэк на встроенные данные если файл не найден
+                    console.warn('Не удалось загрузить data/meta.json, используем встроенные данные:', error.message);
+                    this.cache.meta = this.getMockMetadata();
+                    return this.cache.meta;
+                }
+            }
+
+            // Заглушка для метаданных (используется если data/meta.json недоступен)
+            getMockMetadata() {
+                const mockData = {
+                    _isMock: true, // Флаг для определения режима
+                    books: {
+                        genesis: {
+                            name: "בראשית - Берешит (Бытие)",
+                            hebrewName: "בראשית",
+                            englishName: "Genesis",
+                            chapters: 50,
+                            description: "Книга начал - сотворение мира, праотцы"
+                        },
+                        exodus: {
+                            name: "שמות - Шмот (Исход)",
+                            hebrewName: "שמות",
+                            englishName: "Exodus",
+                            chapters: 40,
+                            description: "Исход из Египта, дарование Торы"
+                        },
+                        leviticus: {
+                            name: "ויקרא - Вайикра (Левит)",
+                            hebrewName: "ויקרא",
+                            englishName: "Leviticus",
+                            chapters: 27,
+                            description: "Законы жертвоприношений и чистоты"
+                        },
+                        numbers: {
+                            name: "במדבר - Бемидбар (Числа)",
+                            hebrewName: "במדבר",
+                            englishName: "Numbers",
+                            chapters: 36,
+                            description: "Странствия в пустыне, перепись народа"
+                        },
+                        deuteronomy: {
+                            name: "דברים - Дварим (Второзаконие)",
+                            hebrewName: "דברים",
+                            englishName: "Deuteronomy",
+                            chapters: 34,
+                            description: "Прощальные речи Моше, повторение законов"
+                        }
+                    }
+                };
+                return mockData;
+            }
+
+            // Заглушка для данных главы (в реальности будет загружаться из JSON файлов)
+            async getMockChapterData(book, chapter) {
+                // Имитация задержки сети
+                await this.delay(500);
+
+                if (book === 'genesis' && chapter === 1) {
+                    return {
+                        book: "genesis",
+                        chapter: 1,
+                        verses: [
+                            {
+                                verse: 1,
+                                words: [
+                                    {
+                                        hebrew: "בְּרֵאשִׁית",
+                                        transliteration: "be-re-shit",
+                                        root: "ראש",
+                                        grammar: "существительное с предлогом בְּ",
+                                        meanings: [
+                                            { meaning: "в начале", context: "временной", usage: "основное значение в данном контексте" },
+                                            { meaning: "вначале", context: "временной", usage: "синонимичный перевод" },
+                                            { meaning: "первоначально", context: "философский", usage: "в философском смысле творения" }
+                                        ],
+                                        etymology: "От корня ראש (голова, начало, главный)",
+                                        forms: "בְּ (предлог 'в') + רֵאשִׁית (начало)",
+                                        commentaries: {
+                                            rashi: "Раши объясняет: 'В начале творения Богом неба и земли'. Слово 'берешит' не означает 'в самом начале времени', но 'в начале процесса творения'.",
+                                            ramban: "Рамбан понимает это как указание на то, что время само было сотворено вместе с миром.",
+                                            sforno: "Сфорно комментирует: Это первое слово Торы указывает на божественную мудрость как на первопричину всего сущего.",
+                                            ibn_ezra: "Ибн Эзра утверждает, что слово 'берешит' следует понимать как 'в начале', когда Бог сотворил небо и землю."
+                                        }
+                                    },
+                                    {
+                                        hebrew: "בָּרָא",
+                                        transliteration: "ba-ra",
+                                        root: "ברא",
+                                        grammar: "глагол прошедшего времени, 3-е лицо, мужской род, единственное число",
+                                        meanings: [
+                                            { meaning: "сотворил", context: "божественный", usage: "творение из ничего (creatio ex nihilo)" },
+                                            { meaning: "создал", context: "общий", usage: "акт создания чего-то нового" },
+                                            { meaning: "произвел", context: "каузативный", usage: "привел к существованию" }
+                                        ],
+                                        etymology: "Корень ברא используется исключительно для божественного творения",
+                                        forms: "ברא-ברוא-בריאה (создавать-быть созданным-творение)",
+                                        commentaries: {
+                                            rashi: "Раши подчеркивает: глагол 'бара' используется только в отношении Бога и означает творение из ничего.",
+                                            ramban: "Рамбан объясняет, что 'бара' указывает на сотворение первичной материи из абсолютного небытия.",
+                                            sforno: "Сфорно интерпретирует 'бара' как создание потенциала для всех будущих форм в мире.",
+                                            ibn_ezra: "Ибн Эзра отмечает, что этот глагол никогда не употребляется с упоминанием материала."
+                                        }
+                                    },
+                                    {
+                                        hebrew: "אֱלֹהִים",
+                                        transliteration: "e-lo-him",
+                                        root: "אלה/אל",
+                                        grammar: "существительное, множественное число с единственным значением",
+                                        meanings: [
+                                            { meaning: "Бог", context: "монотеистический", usage: "единый Бог в иудаизме" },
+                                            { meaning: "Всевышний", context: "возвышенный", usage: "подчеркивает величие" },
+                                            { meaning: "Творец", context: "креативный", usage: "Бог как создатель мира" }
+                                        ],
+                                        etymology: "Множественная форма от אל (сила, мощь), но с единственным значением",
+                                        forms: "אל-אלוה-אלהים (бог-божество-Бог)",
+                                        commentaries: {
+                                            rashi: "Раши объясняет: хотя слово во множественном числе, оно обозначает единого Бога.",
+                                            ramban: "Рамбан указывает: имя 'Элохим' означает Бога в аспекте строгого суда.",
+                                            sforno: "Сфорно комментирует: 'Элохим' указывает на Бога как источник всех сил природы.",
+                                            ibn_ezra: "Ибн Эзра отмечает: множественная форма указывает на всеобъемлющую мощь Творца."
+                                        }
+                                    },
+                                    {
+                                        hebrew: "אֵת",
+                                        transliteration: "et",
+                                        root: "אות",
+                                        grammar: "частица прямого дополнения",
+                                        meanings: [
+                                            { meaning: "[указатель объекта]", context: "грамматический", usage: "указывает на определенное прямое дополнение" },
+                                            { meaning: "именно", context: "усилительный", usage: "подчеркивает определенность объекта" }
+                                        ],
+                                        etymology: "Неизменяемая частица, уникальная для иврита",
+                                        forms: "אֵת, אֶת-וְאֵת (в различных грамматических конструкциях)",
+                                        commentaries: {
+                                            rashi: "Раши указывает: частица 'эт' включает все, что связано с небесами.",
+                                            ramban: "Рамбан объясняет: 'эт' указывает на совершенную форму творения.",
+                                            sforno: "Сфорно: эта частица подчеркивает конкретность объектов творения.",
+                                            ibn_ezra: "Ибн Эзра отмечает: частица показывает определенность объектов."
+                                        }
+                                    },
+                                    {
+                                        hebrew: "הַשָּׁמַיִם",
+                                        transliteration: "ha-sha-ma-yim",
+                                        root: "שמה/שמם",
+                                        grammar: "существительное с определенным артиклем, множественное число",
+                                        meanings: [
+                                            { meaning: "небеса", context: "космологический", usage: "небесная сфера, космос" },
+                                            { meaning: "небо", context: "физический", usage: "видимое небо над землей" },
+                                            { meaning: "высота", context: "пространственный", usage: "высокие места" }
+                                        ],
+                                        etymology: "Возможно от שמה (высота) или связано с מים (вода)",
+                                        forms: "שמים всегда во множественном числе",
+                                        commentaries: {
+                                            rashi: "Раши объясняет: небеса состоят из огня и воды, которые Всевышний смешал.",
+                                            ramban: "Рамбан указывает: небеса включают все духовные сферы и физическое небо.",
+                                            sforno: "Сфорно комментирует: небеса - это сфера неизменного.",
+                                            ibn_ezra: "Ибн Эзра отмечает: небеса созданы как граница между водами."
+                                        }
+                                    },
+                                    {
+                                        hebrew: "וְאֵת",
+                                        transliteration: "ve-et",
+                                        root: "ו + אות",
+                                        grammar: "союз 'и' + частица прямого дополнения",
+                                        meanings: [
+                                            { meaning: "и [объект]", context: "грамматический", usage: "соединяет второе прямое дополнение" },
+                                            { meaning: "а также", context: "добавочный", usage: "включает дополнительный объект" }
+                                        ],
+                                        etymology: "Сочетание союза ו (и) с частицей אֵת",
+                                        forms: "וְאֵת, וְאֶת",
+                                        commentaries: {
+                                            rashi: "Раши комментирует: 've-et' включает все, что принадлежит земле.",
+                                            ramban: "Рамбан объясняет: союз показывает одновременность творения.",
+                                            sforno: "Сфорно указывает: подчеркивает равную важность аспектов творения.",
+                                            ibn_ezra: "Ибн Эзра отмечает: повторение частицы подчеркивает важность элементов."
+                                        }
+                                    },
+                                    {
+                                        hebrew: "הָאָרֶץ",
+                                        transliteration: "ha-a-retz",
+                                        root: "ארץ",
+                                        grammar: "существительное с определенным артиклем, женский род",
+                                        meanings: [
+                                            { meaning: "земля", context: "планетарный", usage: "планета Земля как космическое тело" },
+                                            { meaning: "суша", context: "географический", usage: "сухая часть поверхности" },
+                                            { meaning: "материальный мир", context: "духовный", usage: "физическая реальность" }
+                                        ],
+                                        etymology: "Основной корень ארץ означает 'низкий', 'внизу'",
+                                        forms: "ארץ-ארצות (земля-земли)",
+                                        commentaries: {
+                                            rashi: "Раши объясняет: земля была создана из ничего, как первичная материя.",
+                                            ramban: "Рамбан указывает: земля представляет материальный аспект творения.",
+                                            sforno: "Сфорно комментирует: земля - место изменений и развития.",
+                                            ibn_ezra: "Ибн Эзра отмечает: земля означает всю материальную субстанцию мира."
+                                        }
+                                    }
+                                ],
+                                translation: "В начале сотворил Бог небо и землю"
+                            },
+                            {
+                                verse: 2,
+                                words: [
+                                    {
+                                        hebrew: "וְהָאָרֶץ",
+                                        transliteration: "ve-ha-a-retz",
+                                        root: "ו + ארץ",
+                                        grammar: "союз + существительное с артиклем",
+                                        meanings: [
+                                            { meaning: "а земля", context: "противопоставительный", usage: "контраст с предыдущим" },
+                                            { meaning: "и земля", context: "продолжительный", usage: "продолжение повествования" }
+                                        ],
+                                        etymology: "Сочетание союза ו с הָאָרֶץ",
+                                        forms: "וְהָאָרֶץ"
+                                    },
+                                    {
+                                        hebrew: "הָיְתָה",
+                                        transliteration: "ha-ye-ta",
+                                        root: "היה",
+                                        grammar: "глагол прошедшего времени, женский род",
+                                        meanings: [
+                                            { meaning: "была", context: "экзистенциальный", usage: "состояние существования" },
+                                            { meaning: "стала", context: "трансформационный", usage: "переход в новое состояние" }
+                                        ],
+                                        etymology: "Основной глагол бытия в иврите",
+                                        forms: "היה-הווה-יהיה (был-есть-будет)"
+                                    },
+                                    {
+                                        hebrew: "תֹהוּ",
+                                        transliteration: "to-hu",
+                                        root: "תהה",
+                                        grammar: "существительное, состояние",
+                                        meanings: [
+                                            { meaning: "пустота", context: "философский", usage: "отсутствие формы" },
+                                            { meaning: "хаос", context: "космогонический", usage: "первичный беспорядок" }
+                                        ],
+                                        etymology: "Возможно связано с תעה (блуждать)",
+                                        forms: "תֹהוּ וָבֹהוּ - классическая пара"
+                                    },
+                                    {
+                                        hebrew: "וָבֹהוּ",
+                                        transliteration: "va-vo-hu",
+                                        root: "ו + בהה",
+                                        grammar: "союз + существительное",
+                                        meanings: [
+                                            { meaning: "и пустота", context: "дополнительный", usage: "усиление понятия תֹהוּ" },
+                                            { meaning: "и безвидность", context: "визуальный", usage: "отсутствие форм" }
+                                        ],
+                                        etymology: "בֹהוּ встречается только в паре с תֹהוּ",
+                                        forms: "וָבֹהוּ"
+                                    }
+                                ],
+                                translation: "Земля же была безвидна и пуста, и тьма над бездною"
+                            }
+                        ]
+                    };
+                }
+
+                // Для других книг/глав показываем заглушку
+                return {
+                    book: book,
+                    chapter: chapter,
+                    verses: [
+                        {
+                            verse: 1,
+                            words: [
+                                {
+                                    hebrew: "טקסט",
+                                    transliteration: "tekst",
+                                    root: "טקס",
+                                    grammar: "заглушка",
+                                    meanings: [
+                                        { meaning: "текст будет добавлен", context: "временный", usage: "заглушка для демонстрации" }
+                                    ],
+                                    etymology: "Данные для этой главы пока не добавлены",
+                                    forms: "Скоро будет доступно",
+                                    commentaries: {
+                                        rashi: "Данные для этой главы будут добавлены в следующих версиях.",
+                                        ramban: "Пока доступна только первая глава Бытие для демонстрации.",
+                                        sforno: "Архитектура готова для всех 187 глав Торы.",
+                                        ibn_ezra: "Система динамической загрузки работает корректно."
+                                    }
+                                }
+                            ],
+                            translation: `Текст для ${this.cache.meta.books[book]?.name || book}, глава ${chapter} будет добавлен`
+                        }
+                    ]
+                };
+            }
+
+            // Вспомогательная функция для имитации задержки
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            // Загрузка данных главы с кэшированием
+            async loadChapter(book, chapter) {
+                const cacheKey = `${book}_${chapter}`;
+
+                if (this.cache.chapters[cacheKey]) {
+                    this.showCacheStatus('Загружено из кэша');
+                    return this.cache.chapters[cacheKey];
+                }
+
+                try {
+                    this.showCacheStatus('Загрузка главы...');
+
+                    // Пытаемся загрузить реальный файл главы
+                    const response = await fetch(`data/${book}/chapter${chapter}.json`);
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.cache.chapters[cacheKey] = data;
+                        this.showCacheStatus('Глава загружена из файла');
+                        return data;
+                    } else {
+                        // Если файл не найден, используем заглушку
+                        console.warn(`Файл data/${book}/chapter${chapter}.json не найден, используем заглушку`);
+                        const data = await this.getMockChapterData(book, chapter);
+                        this.cache.chapters[cacheKey] = data;
+                        this.showCacheStatus('Загружена заглушка (файл не найден)');
+                        return data;
+                    }
+                } catch (error) {
+                    // В случае любой ошибки возвращаем заглушку
+                    console.warn(`Ошибка загрузки главы ${book}/${chapter}:`, error.message);
+                    const data = await this.getMockChapterData(book, chapter);
+                    this.cache.chapters[cacheKey] = data;
+                    this.showCacheStatus('Загружена заглушка (ошибка сети)');
+                    return data;
+                }
+            }
+
+            // Заполнение списка книг
+            populateBookSelect() {
+                const books = this.cache.meta.books;
+                this.elements.bookSelect.innerHTML = '<option value="">Выберите книгу...</option>';
+
+                Object.keys(books).forEach(bookKey => {
+                    const book = books[bookKey];
+                    const option = document.createElement('option');
+                    option.value = bookKey;
+                    option.textContent = `${book.name} (${book.chapters} глав)`;
+                    this.elements.bookSelect.appendChild(option);
+                });
+            }
+
+            // Заполнение списка глав
+            populateChapterSelect(book) {
+                const bookData = this.cache.meta.books[book];
+                this.elements.chapterSelect.innerHTML = '';
+                this.elements.chapterSelect.disabled = false;
+
+                for (let i = 1; i <= bookData.chapters; i++) {
+                    const option = document.createElement('option');
+                    option.value = i;
+                    option.textContent = `Глава ${i}`;
+                    this.elements.chapterSelect.appendChild(option);
+                }
+            }
+
+            // Заполнение списка стихов (после загрузки главы)
+            populateVerseSelect(verses) {
+                this.elements.verseSelect.innerHTML = '<option value="all">Все стихи</option>';
+                this.elements.verseSelect.disabled = false;
+
+                verses.forEach(verse => {
+                    const option = document.createElement('option');
+                    option.value = verse.verse;
+                    option.textContent = `Стих ${verse.verse}`;
+                    this.elements.verseSelect.appendChild(option);
+                });
+            }
+
+            // Отображение контента
+            async displayContent() {
+                if (!this.currentState.book || !this.currentState.chapter) {
+                    this.elements.content.innerHTML = '<div class="loading">Выберите книгу и главу</div>';
+                    return;
+                }
+
+                try {
+                    this.elements.content.innerHTML = '<div class="loading">Загрузка главы</div>';
+
+                    const chapterData = await this.loadChapter(this.currentState.book, this.currentState.chapter);
+                    const bookInfo = this.cache.meta.books[this.currentState.book];
+
+                    let html = `
+                        <div class="chapter-info">
+                            <h2>${bookInfo.name}</h2>
+                            <p>Глава ${this.currentState.chapter}</p>
+                            <div class="book-stats">${bookInfo.description}</div>
+                        </div>
+                    `;
+
+                    const versesToShow = this.currentState.verse === 'all'
+                        ? chapterData.verses
+                        : chapterData.verses.filter(v => v.verse == this.currentState.verse);
+
+                    versesToShow.forEach(verse => {
+                        html += `
+                            <div class="verse">
+                                <div class="verse-number">Стих ${verse.verse}</div>
+                                <div class="hebrew-words">
+                        `;
+
+                        verse.words.forEach((word, index) => {
+                            html += `
+                                <span class="hebrew-word"
+                                      data-verse="${verse.verse}"
+                                      data-word="${index}">
+                                    ${word.hebrew}
+                                </span>
+                            `;
+                        });
+
+                        html += `
+                                </div>
+                                <div id="analysis-${verse.verse}" class="word-analysis"></div>
+                                <div class="russian-translation">
+                                    <div class="translation-label">Общий перевод:</div>
+                                    ${verse.translation}
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    this.elements.content.innerHTML = html;
+                    this.attachWordListeners();
+
+                    // Заполняем список стихов после загрузки
+                    if (this.elements.verseSelect.disabled) {
+                        this.populateVerseSelect(chapterData.verses);
+                    }
+
+                } catch (error) {
+                    this.showError('Ошибка загрузки контента: ' + error.message);
+                }
+            }
+
+            // Прикрепление обработчиков к словам
+            attachWordListeners() {
+                const hebrewWords = document.querySelectorAll('.hebrew-word');
+                hebrewWords.forEach(word => {
+                    word.addEventListener('click', (e) => this.handleWordClick(e));
+                });
+            }
+
+            // Обработка клика по слову
+            async handleWordClick(event) {
+                const verseNum = parseInt(event.target.dataset.verse);
+                const wordIndex = parseInt(event.target.dataset.word);
+
+                // Убираем выделение с других слов
+                document.querySelectorAll('.hebrew-word').forEach(w => w.classList.remove('active'));
+                document.querySelectorAll('.word-analysis').forEach(div => div.classList.remove('active'));
+
+                // Выделяем текущее слово
+                event.target.classList.add('active');
+
+                // Показываем анализ
+                await this.displayWordAnalysis(verseNum, wordIndex);
+            }
+
+            // Отображение анализа слова
+            async displayWordAnalysis(verseNum, wordIndex) {
+                try {
+                    const chapterData = await this.loadChapter(this.currentState.book, this.currentState.chapter);
+                    const verse = chapterData.verses.find(v => v.verse === verseNum);
+                    const word = verse.words[wordIndex];
+
+                    const analysisDiv = document.getElementById(`analysis-${verseNum}`);
+
+                    let html = `
+                        <div class="analysis-header">
+                            Анализ слова: ${word.hebrew} (${word.transliteration})
+                        </div>
+
+                        <div class="transliteration">
+                            Транслитерация: ${word.transliteration}
+                        </div>
+
+                        <div class="analysis-section">
+                            <div class="section-title">🔤 Грамматика:</div>
+                            <div class="meaning-item">
+                                <strong>Корень:</strong> ${word.root}<br>
+                                <strong>Форма:</strong> ${word.grammar}<br>
+                                <strong>Словоформы:</strong> ${word.forms}
+                            </div>
+                        </div>
+
+                        <div class="analysis-section">
+                            <div class="section-title">📖 Значения:</div>
+                    `;
+
+                    word.meanings.forEach(meaning => {
+                        html += `
+                            <div class="meaning-item">
+                                <strong>${meaning.meaning}</strong>
+                                <span class="context-tag">${meaning.context}</span>
+                                <br>
+                                <small>${meaning.usage}</small>
+                            </div>
+                        `;
+                    });
+
+                    html += `
+                        </div>
+
+                        <div class="analysis-section">
+                            <div class="section-title">🌱 Этимология:</div>
+                            <div class="meaning-item">
+                                ${word.etymology}
+                            </div>
+                        </div>
+                    `;
+
+                    // Добавляем комментарии, если есть
+                    if (word.commentaries) {
+                        html += `
+                            <div class="commentaries">
+                                <div class="section-title">📚 Комментарии толкователей:</div>
+                                <div class="commentary-tabs">
+                                    <button class="commentary-tab active" data-commentary="rashi">Раши</button>
+                                    <button class="commentary-tab" data-commentary="ramban">Рамбан</button>
+                                    <button class="commentary-tab" data-commentary="sforno">Сфорно</button>
+                                    <button class="commentary-tab" data-commentary="ibn_ezra">Ибн Эзра</button>
+                                </div>
+
+                                <div class="commentary-content active" id="commentary-rashi-${verseNum}-${wordIndex}">
+                                    <div class="commentary-author">Раши (1040-1105):</div>
+                                    <div class="commentary-text">${word.commentaries.rashi}</div>
+                                </div>
+
+                                <div class="commentary-content" id="commentary-ramban-${verseNum}-${wordIndex}">
+                                    <div class="commentary-author">Рамбан/Нахманид (1194-1270):</div>
+                                    <div class="commentary-text">${word.commentaries.ramban}</div>
+                                </div>
+
+                                <div class="commentary-content" id="commentary-sforno-${verseNum}-${wordIndex}">
+                                    <div class="commentary-author">Сфорно (1475-1550):</div>
+                                    <div class="commentary-text">${word.commentaries.sforno}</div>
+                                </div>
+
+                                <div class="commentary-content" id="commentary-ibn_ezra-${verseNum}-${wordIndex}">
+                                    <div class="commentary-author">Ибн Эзра (1089-1167):</div>
+                                    <div class="commentary-text">${word.commentaries.ibn_ezra}</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    analysisDiv.innerHTML = html;
+                    analysisDiv.classList.add('active');
+
+                    // Прикрепляем обработчики для табов комментариев
+                    if (word.commentaries) {
+                        this.attachCommentaryTabListeners(verseNum, wordIndex);
+                    }
+
+                } catch (error) {
+                    this.showError('Ошибка отображения анализа: ' + error.message);
+                }
+            }
+
+            // Обработчики для табов комментариев
+            attachCommentaryTabListeners(verseNum, wordIndex) {
+                const tabs = document.querySelectorAll(`#analysis-${verseNum} .commentary-tab`);
+                const contents = document.querySelectorAll(`#analysis-${verseNum} .commentary-content`);
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        contents.forEach(c => c.classList.remove('active'));
+
+                        tab.classList.add('active');
+
+                        const commentaryType = tab.dataset.commentary;
+                        const content = document.getElementById(`commentary-${commentaryType}-${verseNum}-${wordIndex}`);
+                        if (content) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            }
+
+            // Прикрепление основных обработчиков событий
+            attachEventListeners() {
+                this.elements.bookSelect.addEventListener('change', async (e) => {
+                    this.currentState.book = e.target.value;
+                    this.currentState.chapter = null;
+                    this.currentState.verse = 'all';
+
+                    if (this.currentState.book) {
+                        this.populateChapterSelect(this.currentState.book);
+                        this.elements.chapterSelect.disabled = false;
+                        this.elements.verseSelect.innerHTML = '<option value="">Выберите главу</option>';
+                        this.elements.verseSelect.disabled = true;
+                    } else {
+                        this.elements.chapterSelect.disabled = true;
+                        this.elements.verseSelect.disabled = true;
+                    }
+
+                    await this.displayContent();
+                });
+
+                this.elements.chapterSelect.addEventListener('change', async (e) => {
+                    this.currentState.chapter = parseInt(e.target.value);
+                    this.currentState.verse = 'all';
+
+                    await this.displayContent();
+                });
+
+                this.elements.verseSelect.addEventListener('change', async (e) => {
+                    this.currentState.verse = e.target.value;
+                    await this.displayContent();
+                });
+            }
+
+            // Показ статуса кэша
+            showCacheStatus(message) {
+                this.elements.cacheStatus.textContent = message;
+                this.elements.cacheStatus.classList.add('show');
+
+                setTimeout(() => {
+                    this.elements.cacheStatus.classList.remove('show');
+                }, 2000);
+            }
+
+            // Показ ошибки
+            showError(message) {
+                this.elements.content.innerHTML = `
+                    <div class="error">
+                        <h3>Ошибка</h3>
+                        <p>${message}</p>
+                        <p><small>Проверьте подключение к интернету и попробуйте еще раз.</small></p>
+                    </div>
+                `;
+            }
+        }
+
+        // Инициализация приложения
+        const app = new TorahApp();
+        app.init();
+    </script>
+</body>
+</html>
