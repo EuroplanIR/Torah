@@ -439,6 +439,10 @@
                         statusElement.textContent = 'Демо-режим (встроенные данные) ⚠️';
                         statusElement.style.color = '#ff9800';
                     }
+                    
+                    // Показываем текущий базовый путь для отладки
+                    console.log('BASE_PATH:', BASE_PATH);
+                    console.log('Current location:', window.location.pathname);
                 }
             }
             
@@ -504,6 +508,9 @@
     </div>
 
     <script>
+        // Автоматическое определение базового пути для GitHub Pages
+        const BASE_PATH = window.location.pathname.includes('/Torah/') ? '/Torah/' : '';
+        
         // Система управления состоянием приложения
         class TorahApp {
             constructor() {
@@ -546,7 +553,7 @@
 
                 try {
                     // Загружаем реальный файл метаданных
-                    const response = await fetch('data/meta.json');
+                    const response = await fetch(`${BASE_PATH}data/meta.json`);
                     if (!response.ok) {
                         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                     }
@@ -858,29 +865,31 @@
 
                 try {
                     this.showCacheStatus('Загрузка главы...');
+                    console.log(`Попытка загрузить: ${BASE_PATH}data/${book}/chapter${chapter}.json`);
                     
                     // Пытаемся загрузить реальный файл главы
-                    const response = await fetch(`data/${book}/chapter${chapter}.json`);
+                    const response = await fetch(`${BASE_PATH}data/${book}/chapter${chapter}.json`);
                     
                     if (response.ok) {
                         const data = await response.json();
                         this.cache.chapters[cacheKey] = data;
-                        this.showCacheStatus('Глава загружена из файла');
+                        this.showCacheStatus('Глава загружена из файла ✅');
+                        console.log(`Успешно загружена глава ${chapter} книги ${book}`);
                         return data;
                     } else {
                         // Если файл не найден, используем заглушку
-                        console.warn(`Файл data/${book}/chapter${chapter}.json не найден, используем заглушку`);
+                        console.warn(`Файл ${BASE_PATH}data/${book}/chapter${chapter}.json не найден (${response.status}), используем заглушку`);
                         const data = await this.getMockChapterData(book, chapter);
                         this.cache.chapters[cacheKey] = data;
-                        this.showCacheStatus('Загружена заглушка (файл не найден)');
+                        this.showCacheStatus('Загружена заглушка (файл не найден) ⚠️');
                         return data;
                     }
                 } catch (error) {
                     // В случае любой ошибки возвращаем заглушку
-                    console.warn(`Ошибка загрузки главы ${book}/${chapter}:`, error.message);
+                    console.error(`Ошибка загрузки главы ${book}/${chapter}:`, error);
                     const data = await this.getMockChapterData(book, chapter);
                     this.cache.chapters[cacheKey] = data;
-                    this.showCacheStatus('Загружена заглушка (ошибка сети)');
+                    this.showCacheStatus('Загружена заглушка (ошибка сети) ⚠️');
                     return data;
                 }
             }
@@ -897,6 +906,8 @@
                     option.textContent = `${book.name} (${book.chapters} глав)`;
                     this.elements.bookSelect.appendChild(option);
                 });
+                
+                console.log('Книги загружены:', Object.keys(books));
             }
 
             // Заполнение списка глав
@@ -911,6 +922,8 @@
                     option.textContent = `Глава ${i}`;
                     this.elements.chapterSelect.appendChild(option);
                 }
+                
+                console.log(`Главы для ${book} загружены: 1-${bookData.chapters}`);
             }
 
             // Заполнение списка стихов (после загрузки главы)
@@ -928,6 +941,8 @@
 
             // Отображение контента
             async displayContent() {
+                console.log('displayContent вызван:', this.currentState);
+                
                 if (!this.currentState.book || !this.currentState.chapter) {
                     this.elements.content.innerHTML = '<div class="loading">Выберите книгу и главу</div>';
                     return;
@@ -938,6 +953,8 @@
                     
                     const chapterData = await this.loadChapter(this.currentState.book, this.currentState.chapter);
                     const bookInfo = this.cache.meta.books[this.currentState.book];
+
+                    console.log('Данные главы загружены:', chapterData);
 
                     let html = `
                         <div class="chapter-info">
@@ -950,6 +967,8 @@
                     const versesToShow = this.currentState.verse === 'all' 
                         ? chapterData.verses 
                         : chapterData.verses.filter(v => v.verse == this.currentState.verse);
+
+                    console.log('Стихи для отображения:', versesToShow);
 
                     versesToShow.forEach(verse => {
                         html += `
@@ -973,7 +992,7 @@
                                 <div id="analysis-${verse.verse}" class="word-analysis"></div>
                                 <div class="russian-translation">
                                     <div class="translation-label">Общий перевод:</div>
-                                    ${verse.translation}
+                                    ${verse.translation || verse.russian_translation}
                                 </div>
                             </div>
                         `;
@@ -988,6 +1007,7 @@
                     }
 
                 } catch (error) {
+                    console.error('Ошибка в displayContent:', error);
                     this.showError('Ошибка загрузки контента: ' + error.message);
                 }
             }
@@ -1141,6 +1161,7 @@
             // Прикрепление основных обработчиков событий
             attachEventListeners() {
                 this.elements.bookSelect.addEventListener('change', async (e) => {
+                    console.log('Выбрана книга:', e.target.value);
                     this.currentState.book = e.target.value;
                     this.currentState.chapter = null;
                     this.currentState.verse = 'all';
@@ -1159,6 +1180,7 @@
                 });
 
                 this.elements.chapterSelect.addEventListener('change', async (e) => {
+                    console.log('Выбрана глава:', e.target.value);
                     this.currentState.chapter = parseInt(e.target.value);
                     this.currentState.verse = 'all';
                     
@@ -1166,6 +1188,7 @@
                 });
 
                 this.elements.verseSelect.addEventListener('change', async (e) => {
+                    console.log('Выбран стих:', e.target.value);
                     this.currentState.verse = e.target.value;
                     await this.displayContent();
                 });
