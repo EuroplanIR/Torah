@@ -1191,6 +1191,22 @@
                     </div>
                 `;
             }
+
+            // Обновление статуса режима загрузки
+            updateLoadingModeStatus() {
+                const statusElement = document.getElementById('loadingMode');
+                if (statusElement) {
+                    // Проверяем, используем ли реальные файлы или заглушки
+                    const usingRealFiles = this.cache.meta && !this.cache.meta._isMock;
+                    if (usingRealFiles) {
+                        statusElement.textContent = 'Загрузка из JSON файлов ✅';
+                        statusElement.style.color = '#4caf50';
+                    } else {
+                        statusElement.textContent = 'Демо-режим (встроенные данные) ⚠️';
+                        statusElement.style.color = '#ff9800';
+                    }
+                }
+            }
         }
 
         // Инициализация приложения
