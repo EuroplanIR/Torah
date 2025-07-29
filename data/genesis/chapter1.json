@@ -1,0 +1,1041 @@
+{
+  "book": "genesis",
+  "chapter": 1,
+  "hebrew_title": "בְּרֵאשִׁית",
+  "russian_title": "Сотворение мира",
+  "english_title": "Creation of the World",
+  "theme": "Шесть дней творения и установление субботы",
+  "verses_count": 31,
+  "words_count": 469,
+  
+  "chapter_structure": {
+    "literary_pattern": "Семидневная схема творения",
+    "recurring_formula": "וַיֹּאמֶר אֱלֹהִים ... וַיְהִי כֵן ... וַיַּרְא אֱלֹהִים כִּי טוֹב",
+    "days": [
+      {"day": 1, "verses": "1-5", "creation": "свет и тьма"},
+      {"day": 2, "verses": "6-8", "creation": "небесная твердь"},
+      {"day": 3, "verses": "9-13", "creation": "суша и растения"},
+      {"day": 4, "verses": "14-19", "creation": "светила"},
+      {"day": 5, "verses": "20-23", "creation": "морские животные и птицы"},
+      {"day": 6, "verses": "24-31", "creation": "наземные животные и человек"}
+    ]
+  },
+
+  "verses": [
+    {
+      "verse": 1,
+      "hebrew_text": "בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ",
+      "transliteration": "be-re-shit ba-ra e-lo-him et ha-sha-ma-yim ve-et ha-a-retz",
+      "russian_translation": "В начале сотворил Бог небо и землю",
+      "verse_theme": "Общее утверждение о творении",
+      "theological_significance": "Основополагающий стих о творении мира Богом из ничего",
+      "literary_features": [
+        "Аллитерация ב-ר в первых двух словах",
+        "Хиастическая структура: время-действие-субъект-объекты",
+        "Параллелизм 'небо и земля' (меризм - все мироздание)"
+      ],
+      
+      "words": [
+        {
+          "hebrew": "בְּרֵאשִׁית",
+          "transliteration": "be-re-shit",
+          "position": 1,
+          "root": "ראש",
+          "strong_number": "H7225",
+          
+          "grammar": {
+            "part_of_speech": "noun",
+            "gender": "feminine",
+            "number": "singular", 
+            "state": "construct",
+            "prefix": "בְּ",
+            "prefix_meaning": "in, at, with"
+          },
+          
+          "morphology": {
+            "base_form": "רֵאשִׁית",
+            "construct_form": "רֵאשִׁית",
+            "with_prefix": "בְּרֵאשִׁית",
+            "paradigm": "segolate noun pattern",
+            "vocalization": "בְּ (sheva) + רֵ (tsere) + אשִׁ (hiriq) + ית (final yod-tav)"
+          },
+          
+          "meanings": [
+            {
+              "meaning": "в начале",
+              "context": "temporal",
+              "usage": "указание на начальный момент процесса творения",
+              "frequency": "primary",
+              "notes": "Не абсолютное начало времени, а начало конкретного действия"
+            },
+            {
+              "meaning": "вначале",
+              "context": "temporal",
+              "usage": "синонимичный перевод",
+              "frequency": "secondary"
+            },
+            {
+              "meaning": "первоначально",
+              "context": "philosophical",
+              "usage": "в философском смысле первопричины",
+              "frequency": "tertiary"
+            },
+            {
+              "meaning": "в голове/главе",
+              "context": "literal",
+              "usage": "буквальное значение корня ראש",
+              "frequency": "rare",
+              "notes": "Этимологическая связь с понятием 'главенства'"
+            }
+          ],
+          
+          "etymology": {
+            "root_meaning": "голова, вершина, начало, главный",
+            "semantic_development": "От конкретного 'голова' к абстрактному 'начало'",
+            "related_words": [
+              "רֹאשׁ (голова, глава)",
+              "רִאשׁוֹן (первый)",
+              "רֵאשִׁית (начало, первенцы)"
+            ],
+            "cognates": [
+              "арамейский: רֵישָׁא",
+              "арабский: رأس",
+              "угаритский: riš"
+            ]
+          },
+          
+          "syntactic_function": "temporal/circumstantial adverbial",
+          "discourse_function": "topic setter - вводит основную тему",
+          
+          "commentaries": {
+            "rashi": {
+              "hebrew": "רש״י מפרש: 'בתחילת ברוא אלהים את השמים ואת הארץ'. אין המקרא הזה אומר אלא דרשני.",
+              "translation": "Раши объясняет: 'В начале творения Богом неба и земли'. Этот стих только просит: толкуй меня!",
+              "interpretation": "Грамматически это зависимое состояние, требующее продолжения",
+              "theme": "грамматический анализ"
+            },
+            "ramban": {
+              "hebrew": "הרמב״ן כותב: הזמן נברא עם העולם, ולפני הבריאה לא היה זמן כלל.",
+              "translation": "Рамбан пишет: время было сотворено вместе с миром, и до творения вообще не было времени.",
+              "interpretation": "Философское понимание творения времени",
+              "theme": "философия времени"
+            },
+            "sforno": {
+              "hebrew": "ספורנו מבאר: 'בראשית' מורה על החכמה האלהית שהיא ראשית דרכו.",
+              "translation": "Сфорно объясняет: 'В начале' указывает на божественную мудрость, которая есть начало Его пути.",
+              "interpretation": "Связь с Притчи 8:22 - мудрость как орудие творения",
+              "theme": "божественная мудрость"
+            },
+            "ibn_ezra": {
+              "hebrew": "אבן עזרא אומר: 'בראשית ברוא' - בעת שהחל לברוא.",
+              "translation": "Ибн Эзра говорит: 'В начале творения' - во время, когда начал творить.",
+              "interpretation": "Временная конструкция с инфинитивом",
+              "theme": "лингвистический анализ"
+            }
+          },
+          
+          "cross_references": [
+            {
+              "reference": "Притчи 8:22",
+              "hebrew": "יְהוָה קָנָנִי רֵאשִׁית דַּרְכּוֹ",
+              "translation": "Господь имел меня началом пути Своего",
+              "connection": "Мудрость как רֵאשִׁית творения"
+            },
+            {
+              "reference": "Иоанна 1:1",
+              "greek": "Ἐν ἀρχῇ ἦν ὁ λόγος",
+              "translation": "В начале было Слово",
+              "connection": "Параллель в Новом Завете"
+            }
+          ],
+          
+          "textual_criticism": {
+            "masoretic_text": "בְּרֵאשִׁית",
+            "septuagint": "Ἐν ἀρχῇ",
+            "vulgate": "In principio",
+            "variants": "Нет значимых вариантов чтения"
+          }
+        },
+        
+        {
+          "hebrew": "בָּרָא",
+          "transliteration": "ba-ra",
+          "position": 2,
+          "root": "ברא",
+          "strong_number": "H1254",
+          
+          "grammar": {
+            "part_of_speech": "verb",
+            "tense": "perfect",
+            "aspect": "completed action",
+            "person": "third",
+            "gender": "masculine",
+            "number": "singular",
+            "stem": "qal",
+            "voice": "active"
+          },
+          
+          "morphology": {
+            "paradigm": "III-aleph verb",
+            "perfect_forms": [
+              "בָּרָא (3ms)", "בָּרְאָה (3fs)", "בָּרָאתָ (2ms)",
+              "בָּרָאת (2fs)", "בָּרָאתִי (1cs)", "בָּרְאוּ (3cp)"
+            ],
+            "imperfect": "יִבְרָא",
+            "imperative": "בְּרָא",
+            "infinitive_construct": "בְּרֹא",
+            "participle": "בּוֹרֵא"
+          },
+          
+          "meanings": [
+            {
+              "meaning": "сотворил",
+              "context": "divine",
+              "usage": "исключительно божественное творение из ничего",
+              "frequency": "primary",
+              "notes": "Creatio ex nihilo - творение из небытия"
+            },
+            {
+              "meaning": "создал",
+              "context": "general",
+              "usage": "общий акт создания нового",
+              "frequency": "secondary",
+              "notes": "Всегда с Богом как субъектом в Танахе"
+            },
+            {
+              "meaning": "произвел",
+              "context": "causative",
+              "usage": "привел к существованию",
+              "frequency": "tertiary"
+            },
+            {
+              "meaning": "отделил, отрезал",
+              "context": "etymological",
+              "usage": "возможная этимологическая связь",
+              "frequency": "rare",
+              "notes": "Спорная этимология"
+            }
+          ],
+          
+          "etymology": {
+            "root_meaning": "творить, создавать (только о Боге)",
+            "uniqueness": "Употребляется только с Богом как субъектом в библейском иврите",
+            "semantic_field": "божественная креативность",
+            "related_words": [
+              "בְּרִיָּה (творение, созданное)",
+              "בּוֹרֵא (творец - причастие)",
+              "מִבְרָא (из ничего - позднееврейский)"
+            ],
+            "cognates": [
+              "арабский: برأ (создавать)",
+              "арамейский: ברא (творить)"
+            ]
+          },
+          
+          "theological_significance": {
+            "doctrine": "Creatio ex nihilo",
+            "implications": [
+              "Бог как единственный источник бытия",
+              "Отличие от человеческого 'делания' (עשה)",
+              "Абсолютная власть Бога над творением"
+            ],
+            "debate": "Первичное творение vs формирование уже существующего"
+          },
+          
+          "usage_statistics": {
+            "total_occurrences": 48,
+            "in_genesis": 11,
+            "always_with_god": true,
+            "never_with_preposition": "Никогда не указывает материал творения",
+            "contexts": ["космическое творение", "творение человека", "творение народа"]
+          },
+          
+          "commentaries": {
+            "rashi": {
+              "hebrew": "רש״י מדגיש: לשון בריאה אינו משמש אלא לחידוש העולם מאין.",
+              "translation": "Раши подчеркивает: язык творения используется только для обновления мира из ничего.",
+              "interpretation": "Радикальное отличие от всех других форм создания",
+              "theme": "уникальность божественного творения"
+            },
+            "ramban": {
+              "hebrew": "הרמב״ן מבאר: 'ברא' מורה על בריאת היולי הראשון מאין מוחלט.",
+              "translation": "Рамбан объясняет: 'сотворил' указывает на создание первичной материи из абсолютного небытия.",
+              "interpretation": "Аристотелевское понимание первичной материи",
+              "theme": "философия материи"
+            },
+            "sforno": {
+              "hebrew": "ספורנו פותר: הבריאה היא הוצאה מכח אל הפועל.",
+              "translation": "Сфорно решает: творение есть выведение из потенции в действительность.",
+              "interpretation": "Актуализация божественного замысла",
+              "theme": "потенция и акт"
+            },
+            "ibn_ezra": {
+              "hebrew": "אבן עזרא מעיר: פועל 'ברא' לא נמצא עם חומר.",
+              "translation": "Ибн Эзра замечает: глагол 'творить' не встречается с материалом.",
+              "interpretation": "Лингвистическое наблюдение о синтаксисе",
+              "theme": "грамматический анализ"
+            }
+          },
+          
+          "literary_analysis": {
+            "alliteration": "ב-ר с предыдущим словом בְּרֵאשִׁית",
+            "emphasis": "Ударная позиция в начале предложения",
+            "tense_significance": "Перфект указывает на завершенность акта"
+          }
+        },
+        
+        {
+          "hebrew": "אֱלֹהִים",
+          "transliteration": "e-lo-him",
+          "position": 3,
+          "root": "אלה/אל",
+          "strong_number": "H430",
+          
+          "grammar": {
+            "part_of_speech": "noun",
+            "gender": "masculine",
+            "number": "plural",
+            "definiteness": "definite by nature",
+            "function": "subject of sentence"
+          },
+          
+          "morphology": {
+            "base_form": "אֱלֹהִים",
+            "singular_cognate": "אֱלוֹהַ",
+            "pattern": "אלהים always plural in form",
+            "vocalization": "אֱ (hataf segol) + לֹ (holem) + הִים (hiriq-yod-final mem)"
+          },
+          
+          "meanings": [
+            {
+              "meaning": "Бог",
+              "context": "monotheistic",
+              "usage": "единый Бог Израиля в монотеистическом контексте",
+              "frequency": "primary",
+              "notes": "Плюральная форма с единственным значением"
+            },
+            {
+              "meaning": "Всевышний",
+              "context": "majestic",
+              "usage": "подчеркивает величие и превосходство",
+              "frequency": "secondary"
+            },
+            {
+              "meaning": "Творец",
+              "context": "creative",
+              "usage": "Бог в Его роли создателя мира",
+              "frequency": "contextual"
+            },
+            {
+              "meaning": "Судья",
+              "context": "judicial",
+              "usage": "Бог как источник справедливости и закона",
+              "frequency": "contextual"
+            },
+            {
+              "meaning": "боги",
+              "context": "polytheistic",
+              "usage": "множественные божества в нееврейских контекстах",
+              "frequency": "rare in Torah"
+            }
+          ],
+          
+          "etymology": {
+            "root_meaning": "сила, мощь, власть",
+            "development": "От אל (сильный, могущественный) к אלהים",
+            "plural_significance": "Плюральное великолепие (pluralis majestatis)",
+            "related_words": [
+              "אֵל (Бог, сильный)",
+              "אֱלוֹהַ (божество)",
+              "אֵלִים (сильные, боги)"
+            ],
+            "cognates": [
+              "угаритский: il, ilm",
+              "аккадский: ilu",
+              "арабский: الله (Allah)"
+            ]
+          },
+          
+          "theological_significance": {
+            "monotheism": "Единство во множественности - тринитарные прообразы",
+            "attributes": [
+              "Всемогущество (El Shaddai)",
+              "Святость (Kadosh)",
+              "Справедливость (Tzedek)",
+              "Милосердие (Rachamim)"
+            ],
+            "covenant_name": "Отличается от Тетраграмматона (YHWH)"
+          },
+          
+          "usage_statistics": {
+            "in_genesis_1": 35,
+            "total_in_torah": 2570,
+            "with_plural_verbs": "редко",
+            "with_singular_verbs": "обычно",
+            "distribution": "Универсальное имя Бога"
+          },
+          
+          "commentaries": {
+            "rashi": {
+              "hebrew": "רש״י מבאר: אף על פי שהוא לשון רבים, הפועל יחיד - 'ברא' ולא 'בראו'.",
+              "translation": "Раши объясняет: хотя это множественная форма, глагол в единственном числе - 'сотворил', а не 'сотворили'.",
+              "interpretation": "Грамматическое подтверждение единства Бога",
+              "theme": "единство Божества"
+            },
+            "ramban": {
+              "hebrew": "הרמב״ן כותב: שם 'אלהים' מורה על הקב״ה במידת הדין.",
+              "translation": "Рамбан пишет: имя 'Элохим' указывает на Святого Благословенного в мере суда.",
+              "interpretation": "Различие между именами Бога по их функциям",
+              "theme": "божественные атрибуты"
+            },
+            "sforno": {
+              "hebrew": "ספורנו מדגיש: 'אלהים' כולל כל הכוחות והחוקים בטבע.",
+              "translation": "Сфорно подчеркивает: 'Элохим' включает все силы и законы в природе.",
+              "interpretation": "Бог как источник естественного порядка",
+              "theme": "Бог и природа"
+            },
+            "ibn_ezra": {
+              "hebrew": "אבן עזרא מעיר: צורת הרבים מראה על גודל הכח והשלטון.",
+              "translation": "Ибн Эзра замечает: множественная форма показывает величие силы и власти.",
+              "interpretation": "Лингвистическое объяснение плюрального великолепия",
+              "theme": "языковедческий анализ"
+            }
+          },
+          
+          "ancient_near_eastern_context": {
+            "comparison": "В отличие от политеистических пантеонов",
+            "uniqueness": "Единственность при множественной форме",
+            "polemics": "Полемика против многобожия"
+          }
+        },
+        
+        {
+          "hebrew": "אֵת",
+          "transliteration": "et",
+          "position": 4,
+          "root": "אות",
+          "strong_number": "H853",
+          
+          "grammar": {
+            "part_of_speech": "particle",
+            "function": "direct object marker",
+            "type": "nota accusativi",
+            "definiteness": "indicates definite direct object"
+          },
+          
+          "morphology": {
+            "invariable": "Неизменяемая частица",
+            "variants": ["אֵת", "אֶת", "אֹת"],
+            "with_suffixes": ["אוֹתִי", "אוֹתְךָ", "אוֹתוֹ", "אוֹתָהּ"]
+          },
+          
+          "meanings": [
+            {
+              "meaning": "[маркер прямого дополнения]",
+              "context": "grammatical",
+              "usage": "указывает на определенное прямое дополнение",
+              "frequency": "primary",
+              "notes": "Чисто грамматическая функция"
+            },
+            {
+              "meaning": "именно",
+              "context": "emphatic",
+              "usage": "подчеркивает определенность и важность объекта",
+              "frequency": "secondary"
+            },
+            {
+              "meaning": "сущность",
+              "context": "mystical",
+              "usage": "каббалистическое толкование - указание на сущность",
+              "frequency": "rare"
+            },
+            {
+              "meaning": "с, вместе с",
+              "context": "archaic",
+              "usage": "древнее значение предлога",
+              "frequency": "obsolete"
+            }
+          ],
+          
+          "etymology": {
+            "origin": "Возможно от древнего указательного местоимения",
+            "development": "Грамматикализация от лексемы к частице",
+            "uniqueness": "Уникальная особенность семитских языков",
+            "related_forms": [
+              "את (ты - местоимение)",
+              "אותות (знамения)"
+            ]
+          },
+          
+          "syntactic_function": {
+            "purpose": "Отличает прямое дополнение от подлежащего в VSO порядке",
+            "conditions": "Обычно с определенными объектами",
+            "optional": "Может опускаться с неопределенными объектами"
+          },
+          
+          "commentaries": {
+            "rashi": {
+              "hebrew": "רש״י דורש: 'את השמים' - להביא את הדברים הנלווים לשמים.",
+              "translation": "Раши толкует: 'את небеса' - включить вещи, сопутствующие небесам.",
+              "interpretation": "Частица включает все связанное с основным объектом",
+              "theme": "мидрашическое расширение"
+            },
+            "ramban": {
+              "hebrew": "הרמב״ן מבאר: 'את' מדגיש שהשמים והארץ נבראו בשלמותם.",
+              "translation": "Рамбан объясняет: 'את' подчеркивает, что небо и земля созданы в их совершенстве.",
+              "interpretation": "Указание на полноту и завершенность творения",
+              "theme": "совершенство творения"
+            },
+            "sforno": {
+              "hebrew": "ספורנו אומר: 'את' מורה על בחירת הדברים הספציפיים האלה.",
+              "translation": "Сфорно говорит: 'את' указывает на выбор именно этих специфических вещей.",
+              "interpretation": "Божественный выбор конкретных объектов творения",
+              "theme": "избирательность творения"
+            },
+            "ibn_ezra": {
+              "hebrew": "אבן עזרא פשוט: 'את' היא רק סימן המושא הידוע.",
+              "translation": "Ибн Эзра просто: 'את' - это только знак определенного дополнения.",
+              "interpretation": "Чисто грамматическая функция без дополнительных значений",
+              "theme": "грамматическая простота"
+            }
+          },
+          
+          "modern_hebrew": {
+            "continuation": "Продолжает ту же функцию в современном иврите",
+            "expansion": "Расширенное использование с любыми определенными объектами"
+          }
+        },
+        
+        {
+          "hebrew": "הַשָּׁמַיִם",
+          "transliteration": "ha-sha-ma-yim",
+          "position": 5,
+          "root": "שמה/שמם",
+          "strong_number": "H8064",
+          
+          "grammar": {
+            "part_of_speech": "noun",
+            "gender": "masculine",
+            "number": "dual/plural",
+            "definiteness": "definite",
+            "article": "הַ",
+            "function": "direct object"
+          },
+          
+          "morphology": {
+            "base_form": "שָׁמַיִם",
+            "always_plural": "Всегда употребляется во множественном числе",
+            "pattern": "Возможно первоначально двойственное число",
+            "vocalization": "הַ (patach) + שָׁ (qamats) + מַ (patach) + יִם (hiriq-yod-final mem)"
+          },
+          
+          "meanings": [
+            {
+              "meaning": "небеса",
+              "context": "cosmological",
+              "usage": "вся небесная сфера, космическое пространство",
+              "frequency": "primary",
+              "notes": "Включает все уровни небесной иерархии"
+            },
+            {
+              "meaning": "небо",
+              "context": "physical",
+              "usage": "видимое небо над землей, атмосфера",
+              "frequency": "secondary"
+            },
+            {
+              "meaning": "высота",
+              "context": "spatial",
+              "usage": "высокие места, возвышенности",
+              "frequency": "metaphorical"
+            },
+            {
+              "meaning": "духовные миры",
+              "context": "mystical",
+              "usage": "невидимые духовные сферы",
+              "frequency": "theological"
+            }
+          ],
+          
+          "etymology": {
+            "uncertain_origin": "Этимология спорна",
+            "possibilities": [
+              "От שמה (высота, возвышенность)",
+              "Связь с מים (воды) - 'высокие воды'",
+              "От שום (ставить) - 'поставленное высоко'"
+            ],
+            "related_words": [
+              "שָׁמֶה (пустошь, запустение)",
+              "שַׁמָּה (туда, на то место)"
+            ],
+            "cognates": [
+              "угаритский: šmm",
+              "арамейский: שמיא",
+              "арабский: سماء"
+            ]
+          },
+          
+          "cosmological_significance": {
+            "ancient_cosmology": "Твердь, отделяющая верхние воды от нижних",
+            "levels": "Множественное число может указывать на уровни небес",
+            "biblical_cosmology": "Трехъярусная вселенная: небо-земля-преисподняя"
+          },
+          
+          "theological_themes": {
+            "transcendence": "Место пребывания Бога",
+            "separation": "Отделение от земного",
+            "infinity": "Символ безграничности Божьей"
+          },
+          
+          "commentaries": {
+            "rashi": {
+              "hebrew": "רש״י מפרש: השמים עשויים מאש ומים שהקב״ה ערבם זה בזה.",
+              "translation": "Раши объясняет: небеса сделаны из огня и воды, которые Святой Благословенный смешал друг с другом.",
+              "interpretation": "Этимологическая игра: שמים = אש + מים",
+              "theme": "мидрашическая этимология"
+            },
+            "ramban": {
+              "hebrew": "הרמב״ן כותב: השמים כוללים כל העולמות הרוחניים והגשמיים שמעל לארץ.",
+              "translation": "Рамбан пишет: небеса включают все духовные и материальные миры, которые над землей.",
+              "interpretation": "Иерархия духовных и физических миров",
+              "theme": "космологическая иерархия"
+            },
+            "sforno": {
+              "hebrew": "ספורנו מבאר: השמים הם מקום הקבוע והנצחי, בניגוד לארץ המשתנה.",
+              "translation": "Сфорно объясняет: небеса - это место постоянного и вечного, в отличие от изменчивой земли.",
+              "interpretation": "Контраст между неизменным небом и изменчивой землей",
+              "theme": "постоянство vs изменчивость"
+            },
+            "ibn_ezra": {
+              "hebrew": "אבן עזרא אומר: השמים נבראו כגבול בין המים העליונים והתחתונים.",
+              "translation": "Ибн Эзра говорит: небеса созданы как граница между верхними и нижними водами.",
+              "interpretation": "Функциональное объяснение творения неба",
+              "theme": "космологическая функция"
+            }
+          },
+          
+          "biblical_parallels": {
+            "psalm_19": "השמים מספרים כבוד אל",
+            "isaiah_55": "כי גבהו שמים מארץ",
+            "ecclesiastes": "ואת השמים מלא כל הארץ כבודו"
+          }
+        },
+        
+        {
+          "hebrew": "וְאֵת",
+          "transliteration": "ve-et",
+          "position": 6,
+          "root": "ו + אות",
+          "strong_number": "H853",
+          
+          "grammar": {
+            "part_of_speech": "conjunction + particle",
+            "conjunction": "וְ",
+            "particle": "אֵת",
+            "function": "connects second direct object"
+          },
+          
+          "morphology": {
+            "prefix": "וְ (vav conjunctive)",
+            "base": "אֵת (object marker)",
+            "combined_form": "וְאֵת"
+          },
+          
+          "meanings": [
+            {
+              "meaning": "и [объект]",
+              "context": "grammatical",
+              "usage": "соединяет второе прямое дополнение",
+              "frequency": "primary"
+            },
+            {
+              "meaning": "а также",
+              "context": "additive",
+              "usage": "включает дополнительный объект творения",
+              "frequency": "secondary"
+            },
+            {
+              "meaning": "вместе с",
+              "context": "associative",
+              "usage": "указывает на совместность действия",
+              "frequency": "contextual"
+            }
+          ],
+          
+          "syntactic_function": {
+            "coordination": "Соединяет равнозначные прямые дополнения",
+            "emphasis": "Подчеркивает важность второго объекта",
+            "completeness": "Указывает на полноту творения"
+          },
+          
+          "commentaries": {
+            "rashi": {
+              "hebrew": "רש״י דורש: 'ואת הארץ' - להביא כל מה שבארץ.",
+              "translation": "Раши толкует: 'и את землю' - включить все, что на земле.",
+              "interpretation": "Расширительное толкование включения",
+              "theme": "полнота творения"
+            },
+            "ramban": {
+              "hebrew": "הרמב״ן מבאר: הוו מחבר מראה שהשמים והארץ נבראו יחדיו.",
+              "translation": "Рамбан объясняет: соединительный вав показывает, что небо и земля созданы вместе.",
+              "interpretation": "Одновременность творения",
+              "theme": "синхронность"
+            },
+            "sforno": {
+              "hebrew": "ספורנו כותב: החזרת 'את' מדגישה את חשיבותה השווה של הארץ.",
+              "translation": "Сфорно пишет: повторение 'את' подчеркивает равную важность земли.",
+              "interpretation": "Равенство в значимости творения",
+              "theme": "равнозначность"
+            },
+            "ibn_ezra": {
+              "hebrew": "אבן עזרא פשוט: זו דרך הלשון לחבר שני מושאים.",
+              "translation": "Ибн Эзра просто: это способ языка соединить два дополнения.",
+              "interpretation": "Обычная грамматическая конструкция",
+              "theme": "лингвистическая норма"
+            }
+          }
+        },
+        
+        {
+          "hebrew": "הָאָרֶץ",
+          "transliteration": "ha-a-retz",
+          "position": 7,
+          "root": "ארץ",
+          "strong_number": "H776",
+          
+          "grammar": {
+            "part_of_speech": "noun",
+            "gender": "feminine",
+            "number": "singular",
+            "definiteness": "definite",
+            "article": "הָ",
+            "function": "direct object"
+          },
+          
+          "morphology": {
+            "base_form": "אֶרֶץ",
+            "definite_form": "הָאָרֶץ",
+            "plural": "אֲרָצוֹת",
+            "construct": "אֶרֶץ"
+          },
+          
+          "meanings": [
+            {
+              "meaning": "земля",
+              "context": "planetary",
+              "usage": "планета Земля как космическое тело",
+              "frequency": "primary",
+              "notes": "В противоположность небесам"
+            },
+            {
+              "meaning": "суша",
+              "context": "geographical",
+              "usage": "сухая часть поверхности планеты",
+              "frequency": "secondary",
+              "notes": "В противоположность морю"
+            },
+            {
+              "meaning": "страна",
+              "context": "political",
+              "usage": "определенная территория или государство",
+              "frequency": "contextual"
+            },
+            {
+              "meaning": "почва",
+              "context": "agricultural",
+              "usage": "плодородная земля для выращивания",
+              "frequency": "contextual"
+            },
+            {
+              "meaning": "материальный мир",
+              "context": "philosophical",
+              "usage": "физическая реальность в противоположность духовной",
+              "frequency": "theological"
+            }
+          ],
+          
+          "etymology": {
+            "root_meaning": "низкий, внизу, плоский",
+            "semantic_development": "От 'низкого места' к 'земле'",
+            "related_words": [
+              "אֲרָצָה (к земле, вниз)",
+              "אַרְצִי (земной, местный)",
+              "תַּחְתִּית (нижний)"
+            ],
+            "cognates": [
+              "угаритский: arṣ",
+              "аккадский: erṣetu",
+              "арабский: أرض",
+              "арамейский: ארעא"
+            ]
+          },
+          
+          "cosmological_significance": {
+            "position": "Нижняя часть творения",
+            "contrast": "Противопоставление небесному",
+            "materiality": "Символ материального существования",
+            "fertility": "Потенциал жизни и роста"
+          },
+          
+          "theological_themes": {
+            "immanence": "Место божественного присутствия в материи",
+            "stewardship": "Объект человеческого владычества",
+            "temporality": "Место временного существования",
+            "promise": "Объект божественных обетований"
+          },
+          
+          "commentaries": {
+            "rashi": {
+              "hebrew": "רש״י מבאר: הארץ נבראה תהו ובהו, ואח״כ קיבלה צורתה.",
+              "translation": "Раши объясняет: земля была создана безвидной и пустой, а потом получила свою форму.",
+              "interpretation": "Поэтапное формирование земли",
+              "theme": "процесс творения"
+            },
+            "ramban": {
+              "hebrew": "הרמב״ן כותב: הארץ מסמלת את העולם הגשמי והחומרי.",
+              "translation": "Рамбан пишет: земля символизирует физический и материальный мир.",
+              "interpretation": "Земля как представитель материальности",
+              "theme": "дух vs материя"
+            },
+            "sforno": {
+              "hebrew": "ספורנו מדגיש: הארץ היא מקום השינוי והתפתחות.",
+              "translation": "Сфорно подчеркивает: земля - это место изменения и развития.",
+              "interpretation": "Земля как сфера становления",
+              "theme": "изменчивость"
+            },
+            "ibn_ezra": {
+              "hebrew": "אבן עזרא אומר: 'הארץ' כאן פירושה כל החומר הגשמי של העולם התחתון.",
+              "translation": "Ибн Эзра говорит: 'земля' здесь означает всю физическую материю нижнего мира.",
+              "interpretation": "Земля как вся материальная субстанция",
+              "theme": "материальная основа"
+            }
+          },
+          
+          "literary_function": {
+            "merism": "Вместе с 'небесами' образует меризм - все мироздание",
+            "contrast": "Создает полярность верх-низ",
+            "completeness": "Указывает на целостность творения"
+          }
+        }
+      ],
+      
+      "verse_conclusion": {
+        "summary": "Первый стих устанавливает фундаментальную истину о Боге как Творце всего сущего",
+        "theological_impact": "Основа монотеистического мировоззрения",
+        "literary_beauty": "Краткость и всеобъемлющность выражения"
+      }
+    },
+    
+    {
+      "verse": 2,
+      "hebrew_text": "וְהָאָרֶץ הָיְתָה תֹהוּ וָבֹהוּ וְחֹשֶׁךְ עַל־פְּנֵי תְהוֹם וְרוּחַ אֱלֹהִים מְרַחֶפֶת עַל־פְּנֵי הַמָּיִם",
+      "transliteration": "ve-ha-a-retz ha-ye-ta to-hu va-vo-hu ve-cho-shech al-pe-nei te-hom ve-ru-ach e-lo-him me-ra-che-fet al-pe-nei ha-ma-yim",
+      "russian_translation": "Земля же была безвидна и пуста, и тьма над бездною, и Дух Божий носился над водою",
+      "verse_theme": "Первоначальное состояние земли до упорядочивающего творения",
+      "theological_significance": "Божественный Дух как активная сила над первозданным хаосом",
+      
+      "words": [
+        {
+          "hebrew": "וְהָאָרֶץ",
+          "transliteration": "ve-ha-a-retz",
+          "position": 1,
+          "root": "ו + ארץ",
+          "strong_number": "H776",
+          
+          "grammar": {
+            "part_of_speech": "conjunction + noun",
+            "conjunction": "וְ",
+            "gender": "feminine",
+            "number": "singular",
+            "definiteness": "definite",
+            "function": "subject with contrastive focus"
+          },
+          
+          "meanings": [
+            {
+              "meaning": "а земля",
+              "context": "contrastive",
+              "usage": "противопоставление предыдущему утверждению",
+              "frequency": "primary"
+            },
+            {
+              "meaning": "и земля",
+              "context": "continuative",
+              "usage": "продолжение повествования",
+              "frequency": "secondary"
+            },
+            {
+              "meaning": "но земля",
+              "context": "adversative",
+              "usage": "подчеркивает контраст",
+              "frequency": "interpretive"
+            }
+          ],
+          
+          "commentaries": {
+            "rashi": {
+              "hebrew": "רש״י מבאר: הוו מחבר מלמד על מצבה של הארץ אחרי הבריאה הראשונית.",
+              "translation": "Раши объясняет: соединительный вав учит о состоянии земли после первоначального творения.",
+              "interpretation": "Описание вторичного состояния",
+              "theme": "последовательность творения"
+            }
+          }
+        },
+        
+        {
+          "hebrew": "הָיְתָה",
+          "transliteration": "ha-ye-ta",
+          "position": 2,
+          "root": "היה",
+          "strong_number": "H1961",
+          
+          "grammar": {
+            "part_of_speech": "verb",
+            "tense": "perfect",
+            "person": "third",
+            "gender": "feminine",
+            "number": "singular",
+            "stem": "qal"
+          },
+          
+          "meanings": [
+            {
+              "meaning": "была",
+              "context": "existential",
+              "usage": "состояние существования в прошлом",
+              "frequency": "primary"
+            },
+            {
+              "meaning": "стала",
+              "context": "transformative",
+              "usage": "переход в новое состояние",
+              "frequency": "secondary"
+            },
+            {
+              "meaning": "оказалась",
+              "context": "resultative",
+              "usage": "итоговое состояние",
+              "frequency": "interpretive"
+            }
+          ],
+          
+          "commentaries": {
+            "rashi": {
+              "hebrew": "רש״י דן: האם 'היתה' או 'הייתה' - מה היה מצבה המקורי.",
+              "translation": "Раши обсуждает: 'была' или 'стала' - каково было ее первоначальное состояние.",
+              "interpretation": "Дебат о первоначальном vs вторичном состоянии",
+              "theme": "хронология творения"
+            }
+          }
+        },
+        
+        {
+          "hebrew": "תֹהוּ",
+          "transliteration": "to-hu",
+          "position": 3,
+          "root": "תהה",
+          "strong_number": "H8414",
+          
+          "grammar": {
+            "part_of_speech": "noun",
+            "gender": "masculine",
+            "number": "singular",
+            "state": "absolute",
+            "function": "predicate"
+          },
+          
+          "meanings": [
+            {
+              "meaning": "пустота",
+              "context": "philosophical",
+              "usage": "отсутствие формы и содержания",
+              "frequency": "primary"
+            },
+            {
+              "meaning": "хаос",
+              "context": "cosmogonic",
+              "usage": "первичный беспорядок до организации",
+              "frequency": "secondary"
+            },
+            {
+              "meaning": "бесформенность",
+              "context": "physical",
+              "usage": "отсутствие определенной структуры",
+              "frequency": "tertiary"
+            },
+            {
+              "meaning": "тщетность",
+              "context": "moral",
+              "usage": "бессмысленность, тщета",
+              "frequency": "metaphorical"
+            }
+          ],
+          
+          "etymology": {
+            "uncertain": "Этимология неясна",
+            "possibilities": [
+              "Связь с תעה (блуждать, заблуждаться)",
+              "Ономатопея пустоты",
+              "Заимствование из неизвестного языка"
+            ]
+          },
+          
+          "commentaries": {
+            "rashi": {
+              "hebrew": "רש״י מתרגם: 'תהו' - בוהו, דבר ריק שאין בו ממש.",
+              "translation": "Раши переводит: 'тоhу' - боhу, пустая вещь, в которой нет сущности.",
+              "interpretation": "Полная пустота и бессодержательность",
+              "theme": "отсутствие субстанции"
+            }
+          }
+        },
+        
+        {
+          "hebrew": "וָבֹהוּ",
+          "transliteration": "va-vo-hu",
+          "position": 4,
+          "root": "ו + בהה",
+          "strong_number": "H922",
+          
+          "grammar": {
+            "part_of_speech": "conjunction + noun",
+            "conjunction": "וְ",
+            "gender": "masculine",
+            "number": "singular",
+            "function": "coordinate predicate"
+          },
+          
+          "meanings": [
+            {
+              "meaning": "и пустота",
+              "context": "complementary",
+              "usage": "усиление и дополнение понятия תֹהוּ",
+              "frequency": "primary"
+            },
+            {
+              "meaning": "и безвидность",
+              "context": "visual",
+              "usage": "отсутствие видимых различий",
+              "frequency": "secondary"
+            }
+          ],
+          
+          "literary_significance": {
+            "fixed_pair": "בֹהוּ встречается только в паре с תֹהוּ",
+            "alliteration": "Звуковое сходство создает поэтический эффект",
+            "hendiadys": "Два слова выражают одно сложное понятие"
+          },
+          
+          "commentaries": {
+            "rashi": {
+              "hebrew": "רש״י מוסיף: 'בהו' מוסיף על התהו - ביטוי של השתאות.",
+              "translation": "Раши добавляет: 'боhу' добавляет к тоhу - выражение изумления.",
+              "interpretation": "Усиление концепции пустоты",
+              "theme": "интенсификация"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
