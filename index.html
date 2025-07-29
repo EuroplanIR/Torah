@@ -441,21 +441,21 @@
                     }
                 }
             }
-
+            
             .controls {
                 grid-template-columns: 1fr;
             }
-
+            
             .hebrew-words {
                 gap: 8px;
                 justify-content: center;
             }
-
+            
             .hebrew-word {
                 font-size: 18px;
                 padding: 6px 10px;
             }
-
+            
             .content {
                 padding: 20px;
             }
@@ -463,47 +463,47 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <header>
-        <h1>תורה - Полный подстрочный анализ</h1>
-        <p class="subtitle">Интерактивный анализ всех 5 книг Торы с динамической загрузкой</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1>תורה - Полный подстрочный анализ</h1>
+            <p class="subtitle">Интерактивный анализ всех 5 книг Торы с динамической загрузкой</p>
+        </header>
 
-    <div class="instructions">
-        <div class="instructions-title">📖 Как пользоваться:</div>
-        Выберите книгу, главу и стих. Нажмите на любое слово на иврите для детального анализа. Данные загружаются динамически для быстрой работы.
+        <div class="instructions">
+            <div class="instructions-title">📖 Как пользоваться:</div>
+            Выберите книгу, главу и стих. Нажмите на любое слово на иврите для детального анализа. Данные загружаются динамически для быстрой работы.
+        </div>
+
+        <div class="navigation-info">
+            📊 <strong>Статус:</strong> 5 книг • 187 глав • ~5845 стихов • <span id="loadingMode">Автоматическое определение режима загрузки</span>
+        </div>
+
+        <div class="controls">
+            <select id="bookSelect">
+                <option value="">Выберите книгу...</option>
+            </select>
+
+            <select id="chapterSelect" disabled>
+                <option value="">Сначала выберите книгу</option>
+            </select>
+
+            <select id="verseSelect" disabled>
+                <option value="">Сначала выберите главу</option>
+            </select>
+        </div>
+
+        <div id="content" class="content">
+            <div class="loading">Загрузка метаданных Торы</div>
+        </div>
+
+        <div class="cache-status" id="cacheStatus"></div>
+
+        <footer>
+            <p>© 2025 Интерактивное изучение Торы | Архитектура с динамической загрузкой</p>
+        </footer>
     </div>
 
-    <div class="navigation-info">
-        📊 <strong>Статус:</strong> 5 книг • 187 глав • ~5845 стихов • <span id="loadingMode">Автоматическое определение режима загрузки</span>
-    </div>
-
-    <div class="controls">
-        <select id="bookSelect">
-            <option value="">Выберите книгу...</option>
-        </select>
-
-        <select id="chapterSelect" disabled>
-            <option value="">Сначала выберите книгу</option>
-        </select>
-
-        <select id="verseSelect" disabled>
-            <option value="">Сначала выберите главу</option>
-        </select>
-    </div>
-
-    <div id="content" class="content">
-        <div class="loading">Загрузка метаданных Торы</div>
-    </div>
-
-    <div class="cache-status" id="cacheStatus"></div>
-
-    <footer>
-        <p>© 2025 Интерактивное изучение Торы | Архитектура с динамической загрузкой</p>
-    </footer>
-</div>
-
-<script>
+    <script>
         // Система управления состоянием приложения
         class TorahApp {
             constructor() {
@@ -567,13 +567,13 @@
                     books: {
                         genesis: {
                             name: "בראשית - Берешит (Бытие)",
-                            hebrewName: "בראשית",
+                            hebrewName: "בראשית",  
                             englishName: "Genesis",
                             chapters: 50,
                             description: "Книга начал - сотворение мира, праотцы"
                         },
                         exodus: {
-                            name: "שמות - Шмот (Исход)",
+                            name: "שמות - Шмот (Исход)", 
                             hebrewName: "שמות",
                             englishName: "Exodus",
                             chapters: 40,
@@ -581,7 +581,7 @@
                         },
                         leviticus: {
                             name: "ויקרא - Вайикра (Левит)",
-                            hebrewName: "ויקרא",
+                            hebrewName: "ויקרא", 
                             englishName: "Leviticus",
                             chapters: 27,
                             description: "Законы жертвоприношений и чистоты"
@@ -589,7 +589,7 @@
                         numbers: {
                             name: "במדבר - Бемидбар (Числа)",
                             hebrewName: "במדבר",
-                            englishName: "Numbers",
+                            englishName: "Numbers", 
                             chapters: 36,
                             description: "Странствия в пустыне, перепись народа"
                         },
@@ -640,7 +640,7 @@
                                     {
                                         hebrew: "בָּרָא",
                                         transliteration: "ba-ra",
-                                        root: "ברא",
+                                        root: "ברא", 
                                         grammar: "глагол прошедшего времени, 3-е лицо, мужской род, единственное число",
                                         meanings: [
                                             { meaning: "сотворил", context: "божественный", usage: "творение из ничего (creatio ex nihilo)" },
@@ -850,7 +850,7 @@
             // Загрузка данных главы с кэшированием
             async loadChapter(book, chapter) {
                 const cacheKey = `${book}_${chapter}`;
-
+                
                 if (this.cache.chapters[cacheKey]) {
                     this.showCacheStatus('Загружено из кэша');
                     return this.cache.chapters[cacheKey];
@@ -858,10 +858,10 @@
 
                 try {
                     this.showCacheStatus('Загрузка главы...');
-
+                    
                     // Пытаемся загрузить реальный файл главы
                     const response = await fetch(`data/${book}/chapter${chapter}.json`);
-
+                    
                     if (response.ok) {
                         const data = await response.json();
                         this.cache.chapters[cacheKey] = data;
@@ -935,7 +935,7 @@
 
                 try {
                     this.elements.content.innerHTML = '<div class="loading">Загрузка главы</div>';
-
+                    
                     const chapterData = await this.loadChapter(this.currentState.book, this.currentState.chapter);
                     const bookInfo = this.cache.meta.books[this.currentState.book];
 
@@ -947,8 +947,8 @@
                         </div>
                     `;
 
-                    const versesToShow = this.currentState.verse === 'all'
-                        ? chapterData.verses
+                    const versesToShow = this.currentState.verse === 'all' 
+                        ? chapterData.verses 
                         : chapterData.verses.filter(v => v.verse == this.currentState.verse);
 
                     versesToShow.forEach(verse => {
@@ -960,8 +960,8 @@
 
                         verse.words.forEach((word, index) => {
                             html += `
-                                <span class="hebrew-word"
-                                      data-verse="${verse.verse}"
+                                <span class="hebrew-word" 
+                                      data-verse="${verse.verse}" 
                                       data-word="${index}">
                                     ${word.hebrew}
                                 </span>
@@ -1004,14 +1004,14 @@
             async handleWordClick(event) {
                 const verseNum = parseInt(event.target.dataset.verse);
                 const wordIndex = parseInt(event.target.dataset.word);
-
+                
                 // Убираем выделение с других слов
                 document.querySelectorAll('.hebrew-word').forEach(w => w.classList.remove('active'));
                 document.querySelectorAll('.word-analysis').forEach(div => div.classList.remove('active'));
-
+                
                 // Выделяем текущее слово
                 event.target.classList.add('active');
-
+                
                 // Показываем анализ
                 await this.displayWordAnalysis(verseNum, wordIndex);
             }
@@ -1022,18 +1022,18 @@
                     const chapterData = await this.loadChapter(this.currentState.book, this.currentState.chapter);
                     const verse = chapterData.verses.find(v => v.verse === verseNum);
                     const word = verse.words[wordIndex];
-
+                    
                     const analysisDiv = document.getElementById(`analysis-${verseNum}`);
-
+                    
                     let html = `
                         <div class="analysis-header">
                             Анализ слова: ${word.hebrew} (${word.transliteration})
                         </div>
-
+                        
                         <div class="transliteration">
                             Транслитерация: ${word.transliteration}
                         </div>
-
+                        
                         <div class="analysis-section">
                             <div class="section-title">🔤 Грамматика:</div>
                             <div class="meaning-item">
@@ -1060,7 +1060,7 @@
 
                     html += `
                         </div>
-
+                        
                         <div class="analysis-section">
                             <div class="section-title">🌱 Этимология:</div>
                             <div class="meaning-item">
@@ -1080,22 +1080,22 @@
                                     <button class="commentary-tab" data-commentary="sforno">Сфорно</button>
                                     <button class="commentary-tab" data-commentary="ibn_ezra">Ибн Эзра</button>
                                 </div>
-
+                                
                                 <div class="commentary-content active" id="commentary-rashi-${verseNum}-${wordIndex}">
                                     <div class="commentary-author">Раши (1040-1105):</div>
                                     <div class="commentary-text">${word.commentaries.rashi}</div>
                                 </div>
-
+                                
                                 <div class="commentary-content" id="commentary-ramban-${verseNum}-${wordIndex}">
                                     <div class="commentary-author">Рамбан/Нахманид (1194-1270):</div>
                                     <div class="commentary-text">${word.commentaries.ramban}</div>
                                 </div>
-
+                                
                                 <div class="commentary-content" id="commentary-sforno-${verseNum}-${wordIndex}">
                                     <div class="commentary-author">Сфорно (1475-1550):</div>
                                     <div class="commentary-text">${word.commentaries.sforno}</div>
                                 </div>
-
+                                
                                 <div class="commentary-content" id="commentary-ibn_ezra-${verseNum}-${wordIndex}">
                                     <div class="commentary-author">Ибн Эзра (1089-1167):</div>
                                     <div class="commentary-text">${word.commentaries.ibn_ezra}</div>
@@ -1106,7 +1106,7 @@
 
                     analysisDiv.innerHTML = html;
                     analysisDiv.classList.add('active');
-
+                    
                     // Прикрепляем обработчики для табов комментариев
                     if (word.commentaries) {
                         this.attachCommentaryTabListeners(verseNum, wordIndex);
@@ -1121,14 +1121,14 @@
             attachCommentaryTabListeners(verseNum, wordIndex) {
                 const tabs = document.querySelectorAll(`#analysis-${verseNum} .commentary-tab`);
                 const contents = document.querySelectorAll(`#analysis-${verseNum} .commentary-content`);
-
+                
                 tabs.forEach(tab => {
                     tab.addEventListener('click', () => {
                         tabs.forEach(t => t.classList.remove('active'));
                         contents.forEach(c => c.classList.remove('active'));
-
+                        
                         tab.classList.add('active');
-
+                        
                         const commentaryType = tab.dataset.commentary;
                         const content = document.getElementById(`commentary-${commentaryType}-${verseNum}-${wordIndex}`);
                         if (content) {
@@ -1144,7 +1144,7 @@
                     this.currentState.book = e.target.value;
                     this.currentState.chapter = null;
                     this.currentState.verse = 'all';
-
+                    
                     if (this.currentState.book) {
                         this.populateChapterSelect(this.currentState.book);
                         this.elements.chapterSelect.disabled = false;
@@ -1154,14 +1154,14 @@
                         this.elements.chapterSelect.disabled = true;
                         this.elements.verseSelect.disabled = true;
                     }
-
+                    
                     await this.displayContent();
                 });
 
                 this.elements.chapterSelect.addEventListener('change', async (e) => {
                     this.currentState.chapter = parseInt(e.target.value);
                     this.currentState.verse = 'all';
-
+                    
                     await this.displayContent();
                 });
 
@@ -1175,7 +1175,7 @@
             showCacheStatus(message) {
                 this.elements.cacheStatus.textContent = message;
                 this.elements.cacheStatus.classList.add('show');
-
+                
                 setTimeout(() => {
                     this.elements.cacheStatus.classList.remove('show');
                 }, 2000);
